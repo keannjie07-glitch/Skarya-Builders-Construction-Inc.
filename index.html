@@ -238,6 +238,13 @@
             border-radius: 40px; font-weight: 600; font-size: 0.75rem;
             width: fit-content; margin-bottom: 1rem; color: var(--brown);
         }
+        .hero-text .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            max-width: 90%;
+        }
         .btn {
             display: inline-flex; align-items: center; gap: 0.5rem;
             padding: 0.6rem 1.3rem; border-radius: 40px; font-weight: 600;
@@ -260,6 +267,7 @@
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             animation: fadeInUp 0.5s ease backwards;
+            position: relative;
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -281,7 +289,6 @@
             padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600;
             z-index: 2;
         }
-        .project-card { position: relative; }
 
         /* Services Flip Cards - Responsive */
         .services-grid {
@@ -466,6 +473,7 @@
             }
             .hero-visual { order: -1; max-width: 280px; margin: 0 auto; }
             .hero-badge { margin-left: auto; margin-right: auto; }
+            .hero-text .subtitle { max-width: 100%; text-align: center; }
             .hero-buttons { display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
             .btn { width: 100%; justify-content: center; }
             
@@ -492,13 +500,13 @@
             .team-card-info h4 { font-size: 1.3rem; }
             
             .section-header h2 { font-size: 2rem; }
-            .hero-text .subtitle { font-size: 0.9rem; }
         }
 
         @media (max-width: 480px) {
             .nav-logo .logo-text { font-size: 1rem; }
             .nav-logo img { height: 32px; width: 32px; }
             .hero-text h1 { font-size: 2.2rem; }
+            .hero-text .subtitle { font-size: 0.8rem; }
             .btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
             .section-header h2 { font-size: 1.8rem; }
             .project-info h4 { font-size: 1.2rem; }
@@ -561,7 +569,7 @@
         <div class="hero-text">
             <div class="hero-badge reveal">⭐ 5.0 Rated · Olongapo & Zambales</div>
             <h1 class="reveal">Quality <span>Design & Build</span></h1>
-            <p class="subtitle reveal" style="color:var(--text-secondary); margin-bottom:1.2rem;">Scaffolding, remodeling, kitchens, bathrooms & full home renovations. 20+ completed projects.</p>
+            <p class="subtitle reveal">Skarya Builders is committed to delivering reliable and functional spaces designed with precision and built to endure. From concept planning to project completion, every detail is handled with professionalism, integrity, and expert execution.</p>
             <div class="hero-buttons reveal">
                 <a href="tel:09765636729" class="btn btn-primary">📞 0976 563 6729</a>
                 <a href="#projects" class="btn btn-outline">See Our Work</a>
