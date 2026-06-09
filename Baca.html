@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Skarya Builders Inc. | Construction Excellence | Olongapo City</title>
+    <meta name="description" content="Skarya Builders Inc. – 5.0 rated construction company in Olongapo City & Zambales. Scaffolding, remodeling, design & build, kitchen & bathroom renovations. 20+ finished projects.">
+    <meta name="theme-color" content="#795548">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #08080c;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-light-section: #0a0a10;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --text-muted: #a0a0b0;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --brown: #B97F5C;
+            --brown-light: #D4A27A;
+            --brown-glow: rgba(185, 127, 92, 0.4);
+            --brown-bg: rgba(185, 127, 92, 0.12);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.7);
+            --navbar-bg: rgba(0, 0, 0, 0.85);
+            --footer-bg: #020203;
+            --toggle-bg: #1a1a1a;
+            --toggle-circle: #ffffff;
+            --transition-speed: 0.4s;
+        }
+
+        body.light-mode {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-light-section: #f0f2f5;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #6c6c7e;
+            --border-color: #e2e6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.08);
+            --navbar-bg: rgba(255, 255, 255, 0.96);
+            --footer-bg: #1e1e2a;
+            --brown-bg: rgba(185, 127, 92, 0.08);
+            --brown-glow: rgba(185, 127, 92, 0.3);
+            --toggle-bg: #d4cfc7;
+            --toggle-circle: #B97F5C;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .hero-text h1, .section-header h2, .project-info h4,
+        .service-card h4, .hero-badge, .btn, .nav-links a {
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .btn, .nav-links a, .info-row {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3.2rem, 7vw, 5.4rem);
+            line-height: 1;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-text h1 span {
+            display: inline-block;
+            background: linear-gradient(135deg, #C9A48A 0%, #F1D5B5 25%, #B97F5C 50%, #E4C5A8 75%, #9B6A4A 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: brownShine 5s linear infinite;
+        }
+
+        @keyframes brownShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.3rem, 4.5vw, 3.5rem);
+            letter-spacing: 1px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 10px; }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .progress-bar {
+            height: 4px;
+            background: var(--brown);
+            width: 0%;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 6px var(--brown);
+            transition: width 0.08s linear;
+        }
+
+        .theme-switch-wrapper { display: flex; align-items: center; margin-left: 1rem; }
+        .theme-switch { position: relative; display: inline-block; width: 60px; height: 30px; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--toggle-bg); transition: 0.3s; border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 24px; width: 24px; left: 3px; bottom: 3px;
+            background-color: var(--toggle-circle); transition: 0.3s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--brown); }
+        input:checked + .slider:before { transform: translateX(30px); background-color: #fff; }
+        .slider-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 0.85rem; pointer-events: none; transition: 0.3s; }
+        .slider-icon.sun { left: 5px; opacity: 0; } .slider-icon.moon { right: 5px; opacity: 1; }
+        input:checked ~ .slider-icon.sun { opacity: 1; } input:checked ~ .slider-icon.moon { opacity: 0; }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px;
+            background: var(--brown); color: white; border: none; border-radius: 50%; font-size: 1.4rem;
+            cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .reveal, .reveal-left, .reveal-right, .reveal-scale {
+            opacity: 0;
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .reveal { transform: translateY(35px); }
+        .reveal-left { transform: translateX(-40px); }
+        .reveal-right { transform: translateX(40px); }
+        .reveal-scale { transform: scale(0.94); }
+        .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+            opacity: 1;
+            transform: translateX(0) translateY(0) scale(1);
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--navbar-bg); backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color); transition: 0.3s;
+            padding: 0 1.5rem;
+        }
+        .nav-container {
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center;
+            justify-content: space-between; height: 75px;
+        }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0.6rem; }
+        .nav-logo img { height: 44px; width: 44px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(185,127,92,0.4); }
+        .nav-logo .logo-text { font-family: 'Bebas Neue', cursive; color: var(--text-primary); font-size: 1.45rem; letter-spacing: 1px; }
+        .nav-logo .logo-text span { color: var(--brown); }
+        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem;
+            transition: color 0.2s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--brown); transition: width 0.25s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--brown); color: white !important; padding: 0.55rem 1.4rem !important;
+            border-radius: 40px !important; font-weight: 700 !important;
+        }
+        .nav-cta:hover { background: var(--brown-light); transform: translateY(-2px); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+        .hamburger span { width: 28px; height: 3px; background: var(--text-primary); border-radius: 4px; transition: 0.3s; }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 75px;
+            background: #0c0b0e;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+        body.light-mode .hero-overlay { background: rgba(245, 240, 235, 0.65); }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+        }
+        .hero-badge {
+            background: rgba(185,127,92,0.2); backdrop-filter: blur(4px);
+            border: 1px solid rgba(185,127,92,0.5); padding: 0.5rem 1.2rem;
+            border-radius: 40px; font-weight: 600; font-size: 0.85rem;
+            width: fit-content; margin-bottom: 1.4rem; color: var(--brown);
+        }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.8rem 2rem; border-radius: 40px; font-weight: 600;
+            text-decoration: none; transition: all 0.25s; font-size: 0.9rem;
+        }
+        .btn-primary { background: var(--brown); color: white; border: none; }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); }
+        .btn-primary:hover, .btn-outline:hover { transform: translateY(-3px); filter: brightness(1.03); box-shadow: var(--shadow); }
+
+        /* Projects Grid with Attention-Grabbing Animations */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .project-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+            position: relative;
+            animation: fadeInUp 0.6s ease backwards;
+            animation-delay: calc(var(--order, 0) * 0.03s);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brown), var(--brown-light), var(--brown));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(185, 127, 92, 0.25);
+            border-color: var(--brown);
+        }
+        .project-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1);
+            position: relative;
+        }
+        .project-card:hover .project-img {
+            transform: scale(1.08);
+        }
+        .project-info {
+            padding: 1.2rem 1.2rem 1.4rem;
+            transition: background 0.3s ease;
+        }
+        .project-card:hover .project-info {
+            background: var(--brown-bg);
+        }
+        .project-info h4 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .project-card:hover .project-info h4 {
+            color: var(--brown-light);
+        }
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .project-info p::before {
+            content: "📍";
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        /* Pulsing badge for new/latest projects */
+        .project-card .project-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--brown);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 3;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .project-card:hover .project-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Services Flip Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .service-flip-card {
+            background: transparent;
+            perspective: 1500px;
+            cursor: pointer;
+            height: 100%;
+            min-height: 300px;
+            animation: fadeInUp 0.6s ease backwards;
+            animation-delay: calc(var(--order, 0) * 0.05s);
+        }
+        .service-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            border-radius: 24px;
+        }
+        .service-flip-card.flipped .service-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .service-front, .service-back {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 300px;
+            height: 100%;
+        }
+        .service-front {
+            transform: rotateY(0deg);
+            text-align: center;
+            gap: 0.8rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        .service-front::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--brown), var(--brown-light), #E8C9A0, var(--brown));
+            background-size: 300% 300%;
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: gradientShift 3s ease infinite;
+        }
+        .service-flip-card:hover .service-front::before {
+            opacity: 0.7;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .service-flip-card:hover .service-front {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(185, 127, 92, 0.3);
+            border-color: var(--brown);
+        }
+        .service-front h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            color: var(--brown);
+            margin-bottom: 0.5rem;
+        }
+        .click-prompt {
+            margin-top: 1.2rem;
+            font-size: 0.8rem;
+            color: var(--brown);
+            font-weight: 600;
+            background: rgba(185, 127, 92, 0.2);
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+        .service-flip-card:hover .click-prompt {
+            background: var(--brown);
+            color: white;
+            box-shadow: 0 0 12px var(--brown-glow);
+        }
+        .service-back {
+            transform: rotateY(180deg);
+            text-align: left;
+            overflow-y: auto;
+            background: var(--bg-card);
+            border: 1px solid var(--brown);
+        }
+        .service-back h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.4rem;
+            color: var(--brown);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--brown);
+            padding-left: 0.8rem;
+        }
+        .service-back ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .service-back li {
+            margin-bottom: 0.7rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .service-back li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--brown);
+        }
+
+        /* Team Flip Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .team-card {
+            background: transparent;
+            perspective: 1500px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            min-height: 520px;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform-style: preserve-3d;
+            border-radius: 24px;
+        }
+        .team-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        .flip-front {
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+            background: var(--bg-card);
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            overflow-y: auto;
+            min-height: 520px;
+        }
+        .team-img-full {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+            display: block;
+            background: #2c241f;
+        }
+        .team-card-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .team-card-info h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+        .role {
+            color: var(--brown);
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .tagline {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--brown-light);
+            margin-top: 0.8rem;
+        }
+        .flip-back h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.6rem;
+            color: var(--brown);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--brown);
+            display: inline-block;
+        }
+        .flip-back ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .flip-back li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.2rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        .flip-back li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--brown);
+        }
+
+        .contact-buttons { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.4rem; }
+        .btn-gmail { background: #d44638; color: white; border: none; justify-content: center; }
+        .btn-inquiry { background: var(--brown); color: white; justify-content: center; }
+
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual { order: -1; max-width: 380px; margin: 0 auto; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: var(--navbar-bg); backdrop-filter: blur(24px);
+                flex-direction: column; padding: 6rem 2rem 2rem; transition: right 0.3s;
+                gap: 1.8rem;
+            }
+            .nav-links.active { right: 0; }
+            .hamburger { display: flex; }
+            .theme-switch-wrapper { margin-left: 0; margin-top: 0.5rem; }
+            .projects-grid, .services-grid, .team-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr !important; }
+            .section { padding: 4rem 1.2rem; }
+        }
+        @media (max-width: 500px) {
+            .hero-text h1 { font-size: 2.6rem; }
+            .section-header h2 { font-size: 2rem; }
+            .btn { padding: 0.65rem 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+<button class="back-to-top" id="backToTop">↑</button>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">
+            <img src="https://scontent.fsfs2-1.fna.fbcdn.net/v/t39.30808-6/611761055_3283244961849982_8981585107759634173_n.jpg?stp=dst-jpg_tt6&cstp=mx1500x1500&ctp=s1500x1500&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEkkUWJGw432SzcXt5gZmblpY9LXhxyzNelj0teHHLM12gcU3dbk4YniZZcnA5pUARQQqvi96Zhi3Q9K9zGg6M8&_nc_ohc=MMAMRu3AqnAQ7kNvwG83qua&_nc_oc=Adq8-hqjeapMtYrW6emo2AV4-29pMUT9qMVkGc6xYtHSOZ57AYe-AGCWjuyIooAHBbQ&_nc_zt=23&_nc_ht=scontent.fsfs2-1.fna&_nc_gid=vxyoNpbYFo0hzpzKM7F1eg&_nc_ss=7b2a8&oh=00_Af8h-G41XCR4tn-2OyA4dtMbbLW0DM7dn81yrftDysp-0Q&oe=6A2C56F9" alt="Skarya Builders Logo">
+            <span class="logo-text">SKARYA <span>BUILDERS</span></span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#team">Team</a></li>
+            <li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="tel:09765636729" class="nav-cta">📞 Call Now</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="themeToggleCheckbox">
+                    <input type="checkbox" id="themeToggleCheckbox">
+                    <span class="slider"></span>
+                    <span class="slider-icon sun">☀️</span>
+                    <span class="slider-icon moon">🌙</span>
+                </label>
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://picsum.photos/id/15/1920/1080">
+        <source src="skarya.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-badge reveal">⭐ 5.0 Rated · Olongapo & Zambales</div>
+            <h1 class="reveal">Quality <span>Design & Build</span></h1>
+            <p class="subtitle reveal" style="color:var(--text-secondary);margin-bottom:2rem;">Scaffolding, remodeling, kitchens, bathrooms & full home renovations. Great prices, 20+ completed projects.</p>
+            <div class="hero-buttons reveal">
+                <a href="tel:09765636729" class="btn btn-primary">📞 0976 563 6729</a>
+                <a href="#projects" class="btn btn-outline">See Our Work</a>
+            </div>
+        </div>
+        <div class="hero-visual reveal-scale">
+            <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:28px;padding:2rem;text-align:center;backdrop-filter:blur(4px);">
+                <img src="https://scontent.fsfs2-1.fna.fbcdn.net/v/t39.30808-6/611761055_3283244961849982_8981585107759634173_n.jpg?stp=dst-jpg_tt6&cstp=mx1500x1500&ctp=s1500x1500&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEkkUWJGw432SzcXt5gZmblpY9LXhxyzNelj0teHHLM12gcU3dbk4YniZZcnA5pUARQQqvi96Zhi3Q9K9zGg6M8&_nc_ohc=MMAMRu3AqnAQ7kNvwG83qua&_nc_oc=Adq8-hqjeapMtYrW6emo2AV4-29pMUT9qMVkGc6xYtHSOZ57AYe-AGCWjuyIooAHBbQ&_nc_zt=23&_nc_ht=scontent.fsfs2-1.fna&_nc_gid=vxyoNpbYFo0hzpzKM7F1eg&_nc_ss=7b2a8&oh=00_Af8h-G41XCR4tn-2OyA4dtMbbLW0DM7dn81yrftDysp-0Q&oe=6A2C56F9" alt="Logo" style="width:85px;height:85px;border-radius:50%;object-fit:cover;margin-bottom:1rem;">
+                <div style="font-size:3.6rem;font-weight:900;color:var(--brown);font-family:'Bebas Neue',cursive;">5.0</div>
+                <div style="color:#f4b942;font-size:1.5rem;">★★★★★</div>
+                <p style="color:var(--text-secondary);">Skarya Builders Inc.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" style="padding:5rem 2rem; background:var(--bg-secondary);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="section-header reveal" style="text-align:center;margin-bottom:3rem;"><span style="color:var(--brown);font-weight:600;">About Us</span><h2>Your Trusted Construction Partner</h2></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;" class="about-grid">
+            <div class="reveal-left" style="background:var(--bg-card);border-radius:28px;display:flex;align-items:center;justify-content:center;padding:2rem;border:1px solid var(--border-color);">
+                <img src="https://scontent.fsfs2-1.fna.fbcdn.net/v/t39.30808-6/611761055_3283244961849982_8981585107759634173_n.jpg?stp=dst-jpg_tt6&cstp=mx1500x1500&ctp=s1500x1500&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEkkUWJGw432SzcXt5gZmblpY9LXhxyzNelj0teHHLM12gcU3dbk4YniZZcnA5pUARQQqvi96Zhi3Q9K9zGg6M8&_nc_ohc=MMAMRu3AqnAQ7kNvwG83qua&_nc_oc=Adq8-hqjeapMtYrW6emo2AV4-29pMUT9qMVkGc6xYtHSOZ57AYe-AGCWjuyIooAHBbQ&_nc_zt=23&_nc_ht=scontent.fsfs2-1.fna&_nc_gid=vxyoNpbYFo0hzpzKM7F1eg&_nc_ss=7b2a8&oh=00_Af8h-G41XCR4tn-2OyA4dtMbbLW0DM7dn81yrftDysp-0Q&oe=6A2C56F9" alt="Skarya Builders Logo" style="width:150px;height:150px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div class="reveal-right"><h3 style="font-family:'Bebas Neue',cursive;font-size:2rem;">Serving Olongapo & Zambales</h3><p style="color:var(--text-secondary);">Skarya Builders Inc. is a trusted construction company specializing in scaffolding, remodeling, kitchen & bathroom renovations. Whatever your project needs, we deliver quality at a fair price.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;"><div>⭐ <strong>5.0 Rating</strong></div><div>💰 <strong>Great Prices</strong></div><div>🏠 <strong>Full Service</strong></div><div>📍 <strong>Local Experts</strong></div></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="team" style="padding:5rem 2rem; background:var(--bg-primary);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="section-header reveal" style="text-align:center;"><span style="color:var(--brown);">OUR EXPERTS</span><h2>Meet Our Team</h2><p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.5rem;">✨ Click on any card to flip and see more details ✨</p></div>
+        <div class="team-grid" id="teamGrid"></div>
+    </div>
+</section>
+
+<section id="services" style="padding:5rem 2rem; background:var(--bg-secondary);">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="section-header reveal" style="text-align:center;"><span style="color:var(--brown);">COMPREHENSIVE OFFERINGS</span><h2>What We Offer</h2><p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.5rem;">✨ Hover for glow • Click any card to explore ✨</p></div>
+        <div class="services-grid" id="servicesGrid"></div>
+    </div>
+</section>
+
+<section id="projects" style="padding:5rem 2rem; background:var(--bg-primary);">
+    <div style="max-width:1250px;margin:0 auto;">
+        <div class="section-header reveal" style="text-align:center;">
+            <span style="color:var(--brown);">PORTFOLIO</span>
+            <h2>20 Finished Projects</h2>
+            <div style="width:70px;height:3px;background:var(--brown);margin:0.8rem auto;"></div>
+            <p style="color:var(--text-secondary);">Quality craftsmanship across Olongapo & Zambales — <strong style="color:var(--brown);">Hover to see the magic</strong> ✨</p>
+        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+</section>
+
+<section id="contact" style="padding:5rem 2rem; background:var(--bg-primary);">
+    <div style="max-width:1100px;margin:0 auto;"><div class="section-header reveal" style="text-align:center;"><span style="color:var(--brown);">Contact</span><h2>Get In Touch</h2></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;" class="contact-grid"><div class="reveal-left" style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:28px;padding:2rem;"><p>📍 Unit 4 Lot P-5A Subic Bay Gateway Park Phase 1 Subic Gateway District OLONGAPO CITY, Subic Bay Freeport Zone, 2200 Zambales</p><p>📞 <a href="tel:09765636729" style="color:var(--brown);font-weight:600;">0976 563 6729</a></p><p>🕐 Monday – Friday 8AM – 5PM</p><p style="font-size:0.85rem;color:var(--text-muted);">⚠️ Closed weekends & holidays</p><div class="contact-buttons"><a href="https://forms.gle/LngB1nLL1tq4ZMZy6" target="_blank" class="btn btn-inquiry">📝 Inquiry Form</a><a href="https://mail.google.com/mail/?view=cm&fs=1&to=inquiry@skarya.ph" target="_blank" class="btn btn-gmail">✉️ Gmail</a></div></div><div class="reveal-right map-wrapper" style="background:var(--bg-light-section);border-radius:28px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:2rem;text-align:center;"><span style="font-size:3rem;">📍</span><p style="color:var(--text-secondary);">Find us on Google Maps</p><a href="https://www.google.com/maps/place/Skarya+Builders+Inc./@14.82592,120.3343387,312m/data=!3m1!1e3!4m6!3m5!1s0x339671633a51bd93:0x1d864ea42e9b44cb!8m2!3d14.8260781!4d120.3344866!16s%2Fg%2F11z6mnv28t?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary" style="margin-top:1rem;">Open in Google Maps</a></div></div></div>
+</section>
+
+<footer style="background:var(--footer-bg);color:#ccc;padding:3rem 1.5rem;text-align:center;"><p>Skarya Builders Inc. © <span id="year"></span> | Unit 4 Lot P-5A Subic Bay Gateway Park Phase 1, Olongapo City</p><p>Follow us on <a href="https://www.facebook.com/profile.php?id=61585866430895#" target="_blank" rel="noopener" style="color:var(--brown);">Facebook</a> & <a href="https://instagram.com/skaryaph/" target="_blank" rel="noopener" style="color:var(--brown);">Instagram</a></p><p>Contact: 0976 563 6729 | inquiry@skarya.ph</p></footer>
+
+<script>
+    // Team data
+    const teamData = [
+        { name: "PATRICIAYSABEL MENDIGORIN", role: "REGISTERED AND LICENSED ARCHITECT", desc: "An Architect dedicated to bringing client visions to life through functional, innovative and visually striking spaces. Experienced in creating designs that combine creativity, practicality and exceptional user experience.", tagline: "\"DESIGN A LIFE THAT MIRRORS THE BEAUTY OF THE DREAM.\"", img: "pat.png", backTitle: "Core Competencies", backItems: ["Craft designs that are both beautiful and highly functional.", "Collaborate seamlessly with clients and teams for flawless project delivery.", "Deliver spaces that inspire, enhance usability and exceed expectations.", "Conduct thorough site assessments and ensure full compliance with project standards.", "Introduce innovative solutions that optimize space, workflow and overall design impact."] },
+        { name: "REDAN JOSHUA CABALTICA", role: "CIVIL ENGINEER & PROJECT MANAGER", desc: "Experienced in overseeing construction and operations, turning technical plans into high-quality results. Brings strong project coordination, engineering expertise, and leadership to deliver projects on time and within scope as Project Manager of Skybar Billiard Hall.", tagline: "\"DO WHAT YOU LOVE, AND YOU WILL NEVER WORK A DAY IN YOUR LIFE.\"", img: "red.png", backTitle: "Core Competencies", backItems: ["Oversees projects from planning to completion, ensuring quality, safety, and efficiency.", "Coordinates project teams for smooth execution.", "Conducts inspections and evaluations to ensure compliance.", "Develops project schedules and monitors progress to keep deliverables on track.", "Implements safety & compliance procedures to maintain safe work environments."] },
+        { name: "SONNY SOLARES BATOCAEL", role: "CIVIL ENGINEER & PROJECT MANAGER", desc: "With 20+ years of experience in project management, engineering operations, and property inspection, delivering compliant, structurally sound, and efficiently executed projects.", tagline: "\"FROM BLUEPRINT TO REALITY, PRIDE IN EVERY PROJECT.\"", img: "sonny.png", backTitle: "Core Competencies", backItems: ["Oversee projects from planning to completion, ensuring quality, safety, and timely delivery.", "Coordinate teams for smooth execution.", "Oversee site operations and maintain compliance with standards.", "Implement solutions that enhance efficiency and control costs.", "Provide strategic leadership to ensure consistent and reliable delivery."] }
+    ];
+    const teamContainer = document.getElementById("teamGrid");
+    teamData.forEach(member => {
+        const card = document.createElement("div");
+        card.className = "team-card";
+        card.innerHTML = `<div class="flip-card-inner">
+            <div class="flip-front">
+                <img src="${member.img}" alt="${member.name}" class="team-img-full" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(member.name.split(' ')[0])}&background=8B5A2B&color=fff&size=280&bold=true&length=2&fontsize=100';">
+                <div class="team-card-info"><h4>${member.name}</h4><p class="role">${member.role}</p><p>${member.desc}</p><p class="tagline">${member.tagline}</p></div>
+            </div>
+            <div class="flip-back"><h4>${member.backTitle}</h4><ul>${member.backItems.map(item => `<li>${item}</li>`).join('')}</ul></div>
+        </div>`;
+        teamContainer.appendChild(card);
+    });
+
+    // Services data
+    const servicesData = [
+        { title: "Pre-Construction Services", frontDesc: "Feasibility, budgeting & permit assistance", items: ["Feasibility studies & site analysis", "Budget estimation & cost planning", "Value engineering (cost-saving alternatives)", "Permit and regulatory approval assistance", "Design coordination with architects/engineers"] },
+        { title: "Design-Build Services", frontDesc: "Single-point responsibility, faster delivery", items: ["Single-point responsibility for both design and construction", "Integrated project delivery (faster timelines, reduced risk)", "Conceptual design and 3D modeling"] },
+        { title: "General Contracting", frontDesc: "Full project management & supervision", items: ["Full project management (scheduling, procurement, site supervision)", "Subcontractor hiring and coordination", "Quality control and safety management"] },
+        { title: "Construction Management", frontDesc: "Client representative & cost control", items: ["Act as client's representative (overseeing schedule, budget, contracts)", "Phased or fast-track construction management", "Cost control and change order negotiation"] },
+        { title: "Turnkey Solutions", frontDesc: "Complete handover, ready-to-use", items: ["Complete project delivery from land assessment to handover (ready-to-use)", "Includes finishes, fixtures, MEP (mechanical, electrical, plumbing), and landscaping"] },
+        { title: "Renovation & Remodeling", frontDesc: "Home additions & retrofitting", items: ["Home additions (rooms, floors, extensions)", "Kitchen, bathroom, basement remodeling", "Office or retail space retrofitting"] },
+        { title: "Specialty Construction", frontDesc: "Green building & restoration", items: ["Green/LEED-certified building (energy-efficient, sustainable materials)", "Modular or prefabricated construction", "Historic building restoration"] },
+        { title: "Maintenance & Post-Construction", frontDesc: "Warranty & emergency repairs", items: ["Warranty coverage (1–10 years depending on structure type)", "Annual maintenance contracts (AMCs)", "Emergency repair services (leaks, structural cracks, electrical faults)"] },
+        { title: "Consulting & Advisory", frontDesc: "Risk analysis & compliance guidance", items: ["Feasibility and risk analysis", "Material selection and procurement consulting", "Legal and safety compliance guidance"] },
+        { title: "Financial & Contractual Offers", frontDesc: "Flexible payment & financing", items: ["Fixed-price contracts vs. cost-plus models", "Phased payment plans tied to milestones", "Financing assistance or partnerships with lenders"] },
+        { title: "Client Incentives", frontDesc: "Free inspection & discounts", items: ["Free initial site inspection and quote", "Discounted rates for repeat clients or referrals", "Extended warranty or free maintenance for first 1–2 years"] },
+        { title: "Safety & Insurance Offers", frontDesc: "Full coverage & safety audits", items: ["Comprehensive liability and worker's compensation coverage", "Post-construction safety audit and documentation"] }
+    ];
+    const servicesContainer = document.getElementById("servicesGrid");
+    servicesData.forEach((service, idx) => {
+        const card = document.createElement("div");
+        card.className = "service-flip-card";
+        card.style.setProperty('--order', idx);
+        card.innerHTML = `<div class="service-flip-inner">
+            <div class="service-front">
+                <h4>${service.title}</h4>
+                <p>${service.frontDesc}</p>
+                <div class="click-prompt">📋 Click here for more info</div>
+            </div>
+            <div class="service-back">
+                <h4>${service.title}</h4>
+                <ul>${service.items.map(item => `<li>${item}</li>`).join('')}</ul>
+            </div>
+        </div>`;
+        servicesContainer.appendChild(card);
+    });
+
+    // Project data with contextual images that match descriptions
+    const projectsData = [
+        { title: "Modern Kitchen Remodel", location: "Olongapo City", img: "https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "kitchen" },
+        { title: "Luxury Bathroom Upgrade", location: "Subic Bay", img: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "bathroom" },
+        { title: "Complete Home Makeover", location: "Zambales", img: "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "home" },
+        { title: "Commercial Office Fit-Out", location: "Olongapo", img: "https://images.pexels.com/photos/6963915/pexels-photo-6963915.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "office" },
+        { title: "Outdoor Deck & Patio", location: "Private Residence", img: "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "deck" },
+        { title: "Apartment Renovation", location: "Multiple Units", img: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "apartment" },
+        { title: "Living Room Expansion", location: "Olongapo", img: "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "living" },
+        { title: "Custom Cabinetry", location: "Zambales", img: "https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "cabinetry" },
+        { title: "Roof Repair & Painting", location: "Olongapo", img: "https://images.pexels.com/photos/2078966/pexels-photo-2078966.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "roof" },
+        { title: "Floor Tiling Works", location: "Subic", img: "https://images.pexels.com/photos/175120/pexels-photo-175120.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "tiling" },
+        { title: "Bedroom Makeover", location: "Olongapo", img: "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "bedroom" },
+        { title: "Restaurant Interior", location: "Zambales", img: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "restaurant" },
+        { title: "Garden Landscaping", location: "Olongapo", img: "https://images.pexels.com/photos/210606/pexels-photo-210606.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "garden" },
+        { title: "Garage Conversion", location: "Private", img: "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "garage" },
+        { title: "Staircase Renovation", location: "Olongapo", img: "https://images.pexels.com/photos/170120/pexels-photo-170120.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "staircase" },
+        { title: "Exterior Painting", location: "Zambales", img: "https://images.pexels.com/photos/280277/pexels-photo-280277.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "exterior" },
+        { title: "Ceiling & Molding Works", location: "Olongapo", img: "https://images.pexels.com/photos/257011/pexels-photo-257011.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "ceiling" },
+        { title: "Laundry Area Build", location: "Subic", img: "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "laundry" },
+        { title: "Storefront Renovation", location: "Olongapo", img: "https://images.pexels.com/photos/211103/pexels-photo-211103.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "storefront" },
+        { title: "Full House Rewiring", location: "Zambales", img: "https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg?auto=compress&cs=tinysrgb&w=600", keyword: "electrical" }
+    ];
+    const projContainer = document.getElementById("projectsGrid");
+    projectsData.forEach((project, idx) => {
+        const card = document.createElement("div");
+        card.className = "project-card reveal-scale";
+        card.style.setProperty('--order', idx);
+        card.innerHTML = `
+            <div class="project-badge">✓ Completed</div>
+            <div class="project-img" style="background-image:url('${project.img}'); background-size:cover; background-position:center;" loading="lazy"></div>
+            <div class="project-info">
+                <h4>${project.title}</h4>
+                <p>${project.location} · Premium finish</p>
+            </div>
+        `;
+        projContainer.appendChild(card);
+    });
+
+    // Flip functionality
+    document.querySelectorAll('.team-card, .service-flip-card').forEach(card => {
+        card.addEventListener('click', (e) => { card.classList.toggle('flipped'); });
+    });
+
+    // Scroll, progress, mobile, theme
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+        document.getElementById('backToTop').classList.toggle('show', winScroll > 600);
+        document.getElementById('navbar').classList.toggle('scrolled', winScroll > 50);
+    });
+    document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }));
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
+    const themeToggle = document.getElementById('themeToggleCheckbox');
+    if(localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); themeToggle.checked = true; }
+    themeToggle.addEventListener('change', () => { document.body.classList.toggle('light-mode'); localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark'); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    window.addEventListener('load', () => { document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 70) el.classList.add('visible'); }); });
+</script>
+</body>
+</html>
